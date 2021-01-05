@@ -1,0 +1,6 @@
+#ansible retry files
+*.retry
+#OSX .DS_Store
+.DS_Store
+#VIM backup *~
+*~
