@@ -187,7 +187,48 @@ idNum.updateID()
 
 Go will implicitly use pointer in updateID method. So, the above code will chaneg the value of idNum
 
+----------------------------------------
+Panic:
+You can call panic function to end your progam. 
 
 
+func main() {
+ // some condition does not match
+ panic("exiting the program")
+}
+
+However calling panic should be reserved when you encountered an unmanageable error. You should defer a recover() function
 
 
+func calmDown(){
+fmt.Println(recover())
+}
+
+func main() {
+defer calmDown()
+panic("error")
+
+}
+
+
+Note that reover() takes in interface {} and returns a interface {} type value. So, you can't calll function on your return value. For Ex:
+
+func calmDown() {
+ p := recover()
+ //the code below will throw an error
+ fmt.Println(p.Error())
+
+ //user type assertion to get the underlying type back
+
+  err, ok := p.(error)
+
+if ok {
+       fmt.Println(err)
+ }
+}
+
+func main() {
+ defer calmDown()
+ err := fmt.Errorf("there's an error")
+ panic(err)
+}
